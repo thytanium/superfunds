@@ -194,7 +194,7 @@ This table stores all potential duplicate fund warnings.
         curl --location 'http://localhost/api/potential_duplicate_funds'
         ```
 
-### Companies
+#### Companies
 
 -   `GET /companies`: List all available companies
     -   **Example:**
@@ -232,7 +232,7 @@ This table stores all potential duplicate fund warnings.
         curl --location --request DELETE 'http://localhost/api/companies/1'
         ```
 
-### Managers
+#### Managers
 
 -   `GET /managers`: List all available managers
     -   **Example:**
@@ -272,8 +272,8 @@ This table stores all potential duplicate fund warnings.
 
 ## Unit tests
 
-Due to the limited time to write this solution, testing was limited to feature testing
-to one particular function: detecting potential duplicates when creating a new fund.
+Due to the limited time to write this solution, testing was limited to one
+particular function: detecting potential duplicates when creating a new fund.
 
 In that test, we create an initial fund, then attempt to create another one
 with the same name, and finally look for new records in the database table where
@@ -303,7 +303,7 @@ potential duplicates are kept.
     because the process to detect potential duplicates runs synchronously.
     This process should be queued. Using a queue will also improve user experience
     as users should not have to wait for the detection process to run, as it is irrelevant
-    to the output of the operation.
+    to the output of the create operation.
 -   Caching (for example, using a Redis server) will help the server close connections faster
     on requests for lists of records (like list of funds) and therefore increase throughput.
 
@@ -314,7 +314,9 @@ potential duplicates are kept.
         -   `DuplicateFundWarning.php`
     -   `Http`
         -   `Controllers`
+            -   `CompanyController.php`
             -   `FundController.php`
+            -   `ManagerController.php`
             -   `PotentialDuplicateFundController.php`
         -   `Filters`
             -   `AbstractFilter.php`
@@ -336,7 +338,10 @@ potential duplicates are kept.
 
 The rest of files are the files that come with a Laravel installation.
 
-## If there were more time
+## If there were more time, I would have...
 
--   I would have tried to reduce similar code by creating a single entity to
-    index, create, update, show and delete API records. An approach similar to front controller.
+-   Reduce similar code by creating a single entity to index, create, update, show and delete API records.
+    An approach similar to front controller.
+-   Modified Laravel's default error handler to standardize errors responses a bit more.
+-   Looked for a free PHP PaaS to host this project and provide a live URL.
+-   Added more tests.
