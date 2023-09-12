@@ -146,7 +146,7 @@ This table stores all potential duplicate fund warnings.
         curl --location 'http://localhost/api/funds?manager_id=1&page=2' \
         --header 'Accept: application/json'
         ```
--   `POST /funds`: Create a new fund
+-   `POST /funds`: Create a new fund. This endpoint could fire the event `DuplicateFundWarning` and be consumed by the `StoreDuplicateFundWarning`.
     -   Body:
         -   `name`: string, required. Name for the fund.
         -   `start_year`: integer, required. Start year for the fund.
@@ -340,8 +340,8 @@ The rest of files are the files that come with a Laravel installation.
 
 ## If there were more time, I would have...
 
--   Reduce similar code by creating a single entity to index, create, update, show and delete API records.
+-   Reduced similar code by creating a single entity to index, create, update, show and delete API records.
     An approach similar to front controller.
--   Modified Laravel's default error handler to standardize errors responses a bit more.
+-   Modified Laravel's default error handler to standardize erroneous responses a bit more.
 -   Looked for a free PHP PaaS to host this project and provide a live URL.
 -   Added more tests.
